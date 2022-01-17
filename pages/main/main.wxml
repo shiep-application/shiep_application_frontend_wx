@@ -1,0 +1,21 @@
+<!--pages/main.wxml-->
+<div wx:if="{{current_tab_index == 0 || current_tab_index == 2}}">
+  <t-cell wx:for="{{functions[current_tab_index]}}"  wx:for-item="item" wx:for-index="index" wx:key="index"
+     title="{{item.title}}" description="{{item.description}}" note="{{item.note}}"
+     arrow t-class-left="t-class-left"
+  >
+    <t-icon class="icon-center title-icon" name="{{item.icon}}" slot="left-icon" />
+  </t-cell>
+</div>
+
+<!-- 底部导航栏 -->
+<t-tab-bar bindchange="switch_tab">
+  <t-tab-bar-item
+    wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index"
+    icon="{{item.icon}}"
+    name="{{item.name}}"
+  >
+    {{item.text}}
+  </t-tab-bar-item>
+</t-tab-bar>
+
