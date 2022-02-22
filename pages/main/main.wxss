@@ -1,1 +1,8 @@
 /* pages/main.wxss */
+.title {
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+.ul {
+  padding-left: 10px;
+}
