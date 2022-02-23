@@ -95,7 +95,7 @@ Page({
                   content: '远端服务器链接错误，请重试',
                 });
               }
-              if (res.data.code === 20001) {
+              else if (res.data.code === 20001) {
                 Message.error({
                   offset: [20, 32],
                   duration: 2000,

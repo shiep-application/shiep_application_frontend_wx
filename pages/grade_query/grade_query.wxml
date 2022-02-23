@@ -1,1 +1,9 @@
 <!--pages/grade_query/grade_query.wxml-->
+<view style="margin-left: 10px;margin-top: 10px;">
+  <table-view 
+    headers="{{tableHeader}}" 
+    data="{{row}}" 
+    stripe="{{stripe}}"
+    border="{{border}}"
+  />
+</view>

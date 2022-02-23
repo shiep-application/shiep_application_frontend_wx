@@ -1,0 +1,24 @@
+{
+  "name": "shiep_application_frontend_wx",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "miniprogram-table-component": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiep-application/shiep_application_frontend_wx.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shiep-application/shiep_application_frontend_wx/issues"
+  },
+  "homepage": "https://github.com/shiep-application/shiep_application_frontend_wx#readme",
+  "description": ""
+}
