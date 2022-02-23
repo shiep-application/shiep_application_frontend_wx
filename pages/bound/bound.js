@@ -18,6 +18,79 @@ Page({
   set_password: function(e) {
     this.setData({"password": e.detail.value})
   },
+  bound_cancel: function() {
+    console.log(1)
+    const that = this
+    // 获取wx_code
+    wx.login({
+      success: function (res) {
+        // code转open_id
+        wx.request({
+          url: 'http://127.0.0.1:6677/api/code2openid',
+          data: {
+            code: res.code,
+          },
+          method: 'POST',  
+          header: {'content-type': 'application/json'},
+          success: function(res){
+            // 非200请求
+            if (res.statusCode != 200) {
+              Message.error({
+                offset: [20, 32],
+                duration: 2000,
+                content: '远端服务器链接错误，请重试',
+              });
+            }
+            // 微信开放平台后台错误
+            if (res.data.code === 10001) {
+              Message.error({
+                offset: [20, 32],
+                duration: 2000,
+                content: res.data.message,
+              });
+            } else {
+              // 绑定用户
+              wx.request({
+                url: 'http://127.0.0.1:6677/api/cancel_bound_user',
+                data: {
+                  username: that.data.username,
+                  password: that.data.password,
+                  session_key: res.data.session_key,
+                  open_id: res.data.open_id
+                },
+                method: 'POST',  
+                header: {'content-type': 'application/json'},
+                success: function(res){
+                  console.log(res)
+                  // 非200请求
+                  if (res.statusCode != 200) {
+                    Message.error({
+                      offset: [20, 32],
+                      duration: 2000,
+                      content: '远端服务器链接错误，请重试',
+                    });
+                  }
+                  if (res.data.status === "success") {
+                    Message.success({
+                      offset: [20, 32],
+                      duration: 2000,
+                      content: '解绑成功',
+                    });
+                  } else {
+                    Message.error({
+                      offset: [20, 32],
+                      duration: 2000,
+                      content: res.data.message,
+                    });  
+                  }
+                }
+              })
+            }
+          }
+        })
+      }
+    })
+  },
   bound: function(){
     const that = this
     // 获取wx_code

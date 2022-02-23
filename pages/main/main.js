@@ -18,6 +18,8 @@ Page({
          "if-note": false, "note": ""},
         {"title": "成绩查询", "description": "提供成绩查询以及订阅服务", "icon": "search", 
          "if-note": false, "note": ""},
+         {"title": "课表查询", "description": "提供当学期课表查询服务", "icon": "format-horizontal-align-bottom", 
+         "if-note": true, "note": "敬请期待"},
          {"title": "课程教学评价（学评教）", "description": "提供与研究生系统同步的评教服务", "icon": "thumb-up", 
          "if-note": true, "note": "后端已完成"},
       ],

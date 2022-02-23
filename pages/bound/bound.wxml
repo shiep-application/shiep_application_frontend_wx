@@ -3,7 +3,9 @@
 <t-input name="系统密码" placeholder="请输入研究生系统密码" type="password" value="{{password}}" bindblur="set_password"/>
 
 <t-radio value="{{radio1}}" label="我已阅读相关说明" bindtap="on_change"/>
-<t-button theme="primary" size="large" bindtap="bound" disabled="{{isdiabaled}}">绑定账户</t-button>
+<t-button theme="primary" size="large" bindtap="bound" disabled="{{isdiabaled}}">绑定账户/修改绑定</t-button>
+<view style="height: 5px;"></view>
+<t-button theme="danger" size="large" disabled="{{isdiabaled}}" bindtap="bound_cancel">解除绑定</t-button>
 
 <t-dialog id="t-dialog"/>
 <t-cell title="* 如无法接受缓存研究生系统的账号和密码，可移步网页版 https://shiep.xuyuyan.cn/" hover />
