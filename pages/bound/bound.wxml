@@ -1,6 +1,6 @@
 <!--pages/bound/bound.wxml-->
-<t-input name="学号" placeholder="请输入学号" />
-<t-input name="系统密码" placeholder="请输入研究生系统密码" type="password" />
+<t-input name="学号" placeholder="请输入学号" value="{{username}}" bindblur="set_username"/>
+<t-input name="系统密码" placeholder="请输入研究生系统密码" type="password" value="{{password}}" bindblur="set_password"/>
 
 <t-radio value="{{radio1}}" label="我已阅读相关说明" bindtap="on_change"/>
 <t-button theme="primary" size="large" bindtap="bound" disabled="{{isdiabaled}}">绑定账户</t-button>
