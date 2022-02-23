@@ -15,7 +15,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/grade_query/grade_query",
-    "pages/bound/bound"
+    "pages/bound/bound",
+    "pages/lesson_table/lesson_table"
   ],
   "window": {
     "backgroundTextStyle": "light",

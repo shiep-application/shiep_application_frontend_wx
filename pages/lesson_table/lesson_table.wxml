@@ -1,0 +1,45 @@
+<!--pages/lesson_table/lesson_table.wxml-->
+<view class='content'>
+  <swiper class="swiper" style='width:100%;height:100%;'>
+    <swiper-item catchtouchmove="stopTouchMove" wx:if='{{currentTab == 1}}'>
+      <view class='title' bindtap='clickHide'>
+        <view class='title_left'>
+          <!-- 选择第几周 -->
+          <view class='week' catchtap='clickShow'>第7周</view>
+        </view>
+      </view>
+      <scroll-view scroll-x="true" class='show' wx:if='{{show}}'>
+        <view class='show_week' wx:for="{{weekList}}" wx:key="index">{{item}}</view>
+      </scroll-view>
+      <view wx:if='{{type == 0}}'>
+        <view class="top">
+          <view class='left' style="padding-left: 5px;">节\周</view>
+          <view wx:for="{{['一','二','三','四','五','六','日']}}" wx:key="index" class="top-text">
+            周{{item}}
+          </view>
+        </view>
+        <scroll-view scroll-y="true" class="scroll" style='height:{{windowHeight-110}}px;' bindtap='clickHide'>
+          <view style="width:100%;display:flex;">
+            <view style="background-color:#EFEFF4;color:#333;">
+              <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}}" wx:key="index" class="left" style='height:50px'>
+                {{item}}
+              </view>
+            </view>
+            <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}}" wx:key="index">
+              <view style="width:100%;margin-top:{{(index+1)*50-0.8}}px;  position: absolute;border-bottom:1rpx solid lightgray;">
+              </view>
+            </view>
+            <!--课表-->
+            <view wx:for="{{wlist}}" wx:key="index">
+              <view class="flex-item kcb-item" bindtap="showCardView" data-wlist='{{item}}' data-index='{{index}}' style="margin-left:{{(item.xqj-1)*98}}rpx;margin-top:{{(item.skjc-1)*50+2}}px;height:{{item.skcd*50-5}}px;background-color:{{item.color == '0'?'#FCB8AF':(item.color == '1'?'#81D2FC':'#F8C77A')}}">
+                <view class="smalltext" style='-webkit-line-clamp: {{item.skcd == "3"?"4":(item.skcd == "4"?"6":"2")}};'>{{item.kcm}}</view>
+                <view class='classRoom'>({{item.jsbh == ''?'--':item.jsbh}})</view>
+                <!-- xqj代表星期几上课，sksj是上课时间，skcd上课长度，kcm课程名，jsbh教室编号 -->
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

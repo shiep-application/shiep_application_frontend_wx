@@ -55,6 +55,12 @@ Page({
         url: '../grade_query/grade_query'
       })
     }
+    // 进入课表查询界面
+    if (current_tab_index == 0 && index == 2) {
+      wx.navigateTo({
+        url: '../lesson_table/lesson_table'
+      })
+    }
   },
 
   /**
