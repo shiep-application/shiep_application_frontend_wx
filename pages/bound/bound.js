@@ -174,7 +174,7 @@ Page({
         isdiabaled: true
       })
     }
-    // 如果单选框处于微电机状态，打开弹窗
+    // 如果单选框处于未点击状态，打开弹窗
     else if (this.data.radio1 == 0) {
       Dialog.confirm({
         title: "绑定声明",

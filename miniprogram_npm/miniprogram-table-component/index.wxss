@@ -14,7 +14,7 @@
   border-top-left-radius: 8rpx;
   overflow: visible;
   color: #0b50be;
-  border: 5px solid #ebeef5;
+  border: 3px solid #ebf1e0;
   box-sizing: border-box;
 }
 .thead .td {

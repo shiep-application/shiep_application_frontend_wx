@@ -19,7 +19,7 @@ Page({
         {"title": "成绩查询", "description": "提供成绩查询以及订阅服务", "icon": "search", 
          "if-note": false, "note": ""},
          {"title": "课表查询", "description": "提供当学期课表查询服务", "icon": "format-horizontal-align-bottom", 
-         "if-note": true, "note": "敬请期待"},
+         "if-note": true, "note": ""},
          {"title": "课程教学评价（学评教）", "description": "提供与研究生系统同步的评教服务", "icon": "thumb-up", 
          "if-note": true, "note": "后端已完成"},
       ],
@@ -28,6 +28,8 @@ Page({
         {"title": "学生动态申请", "description": "与研究生系统一致的动态申请服务", "icon": "chart-bubble", 
         "if-note": true, "note": "后端已完成"},
          {"title": "学生请假申请", "description": "与研究生系统一致的请假服务", "icon": "chart-pie", 
+         "if-note": true, "note": "敬请期待"},
+         {"title": "健康上报", "description": "与校方一致的学生个人健康上报服务", "icon": "check", 
          "if-note": true, "note": "敬请期待"},
       ],
     ]

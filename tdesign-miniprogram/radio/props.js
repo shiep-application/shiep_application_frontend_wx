@@ -9,6 +9,12 @@ const props = {
     checked: {
         type: Boolean,
     },
+    /** 单选按钮的值 */
+    value: {
+        type: String,
+        optionalTypes: [Number, Boolean],
+        value: undefined,
+    },
     /** 单选按钮颜色 */
     color: {
         type: String,
@@ -55,12 +61,6 @@ const props = {
     name: {
         type: String,
         value: '',
-    },
-    /** 单选按钮的值 */
-    value: {
-        type: String,
-        optionalTypes: [Number, Boolean],
-        value: undefined,
     },
 };
 export default props;

@@ -1,5 +1,23 @@
 <!--pages/grade_query/grade_query.wxml-->
-<view style="margin-left: 10px;margin-top: 10px;">
+<t-radio checked="{{if_grade_subscribe}}" label="我愿意订阅新成绩推送" active="true" bindtap="on_change"/>
+<view style="text-align: center;">
+  <t-button theme="primary" size="large" shape="square" style="display:inline-block;width: 60%;" bindtap="subscribe" disabled="{{if_grade_subscribe_disabaled}}">
+  订阅 / 增加推送次数({{times}})
+  </t-button>
+  <t-button theme="danger" size="large" shape="square" style="display:inline-block;width: 40%;" bindtap="unsubscribe" disabled="{{if_grade_subscribe_disabaled}}">
+  取消订阅
+  </t-button>
+</view>
+<t-dialog id="t-dialog"/>
+
+<t-swipe-cell style="display: {{if_tips}};">
+  <t-cell title="* 【左滑不再显示】限于微信小程序的要求，每一次消息推送均需要用户的点击授权。因此建议大家尽可能多地点击上方蓝色授权按钮，【每一次推送将消耗次数。次数用尽则无法推送消息。】" />
+  <view slot="right" style="background-color:#E34D59;line-height: 90px;font-size: 13px;color: white;margin-top: 5px;" bindtap="no_tips_btn">
+    <text style="margin: 4px;" >不再提醒</text>
+  </view>
+</t-swipe-cell>
+
+<view style="margin-left: 10px;margin-top: 10px;margin-bottom: 20px;">
   <table-view 
     headers="{{tableHeader}}" 
     data="{{row}}" 
@@ -7,3 +25,16 @@
     border="{{border}}"
   />
 </view>
+
+<!-- 进度加载 -->
+<t-loading
+  theme="circular"
+  size="40rpx"
+  loading="{{isLoading}}"
+  text="加载中..."
+  t-class-indicator="indicator-blue"
+  style="text-align: center;"
+></t-loading>
+
+<!-- 通知 -->
+<t-message id="t-message" />

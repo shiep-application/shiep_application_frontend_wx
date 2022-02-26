@@ -8,7 +8,9 @@
     "t-input": "tdesign-miniprogram/input/input",
     "t-radio": "tdesign-miniprogram/radio/radio",
     "t-button": "tdesign-miniprogram/button/button",
-    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+    "t-dialog": "tdesign-miniprogram/dialog/dialog",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell"
   },
   "pages": [
     "pages/main/main",
