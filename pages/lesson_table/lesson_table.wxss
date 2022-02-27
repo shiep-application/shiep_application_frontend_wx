@@ -130,10 +130,10 @@ page{
 }
 .smalltext {
   position: absolute;
-  top: 40rpx;
+  top: 15rpx;
   left: 8rpx;
   font-size: 26rpx;
-  color: #fff;
+  color: #000;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -142,10 +142,22 @@ page{
 }
 .classRoom{
   position: absolute;
+  height: 20pt;
   bottom: 10rpx;
   font-size: 8pt;
-  color: #fff;
+  color: #000;
   padding-left: 2px;
+  overflow: hidden;
+  white-space: overflow;
+}
+.js{
+  position: absolute;
+  height: 20pt;
+  bottom: 50rpx;
+  font-size: 8pt;
+  color: #000;
+  overflow: hidden;
+  white-space: overflow;
 }
 .logo{
   color: #FFF;
