@@ -10,7 +10,9 @@
     "t-button": "tdesign-miniprogram/button/button",
     "t-dialog": "tdesign-miniprogram/dialog/dialog",
     "t-loading": "tdesign-miniprogram/loading/loading",
-    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell"
+    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tabs/tab-panel"
   },
   "pages": [
     "pages/main/main",

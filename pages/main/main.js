@@ -7,6 +7,7 @@ Page({
    */
   data: {
     current_tab_index: 0,
+    value: "0",
     list: [
       {"name": "study", "text": "学业管理", "icon": "chart"},
       {"name": "info", "text": "公告", "icon": "chat"},
@@ -29,12 +30,12 @@ Page({
         "if-note": true, "note": "后端已完成"},
          {"title": "学生请假申请", "description": "与研究生系统一致的请假服务", "icon": "chart-pie", 
          "if-note": true, "note": "敬请期待"},
-         {"title": "健康上报", "description": "与校方一致的学生个人健康上报服务", "icon": "check", 
-         "if-note": true, "note": "敬请期待"},
       ],
     ]
   },
-
+  onTabsChange(e) {
+    this.setData({ value: e.detail.value })
+  },
   switch_tab(e) {
     // console.log(e.detail)
     this.setData({current_tab_index: e.detail})
