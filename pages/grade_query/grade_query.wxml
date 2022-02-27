@@ -17,6 +17,7 @@
   </view>
 </t-swipe-cell>
 
+<view style="padding-left: 15px;font-size: 14px;padding-top: 20px;"><text>平均学分成绩： </text><text>{{ave_grades}}</text></view>
 <view style="margin-left: 10px;margin-top: 10px;margin-bottom: 20px;">
   <table-view 
     headers="{{tableHeader}}" 

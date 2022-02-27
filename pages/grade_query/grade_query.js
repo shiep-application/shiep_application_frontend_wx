@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    ave_grades: "计算中...",
     if_tips: "",
     if_grade_subscribe: 0,
     if_grade_subscribe_disabaled: true,
@@ -306,6 +307,14 @@ Page({
                               row: res.data,
                               isLoading: false
                             })
+                            // 计算平均学分成绩
+                            let sum_grade = 0
+                            for (let i = 0; i < res.data.length; i++) {
+                              sum_grade = sum_grade + parseInt(res.data[i].cj)
+                            }
+                            let ave_grades = sum_grade / res.data.length
+                            ave_grades = Math.round(ave_grades * 1000) / 1000
+                            that.setData({ave_grades: ave_grades+""})
                           }
                         }
                       })
