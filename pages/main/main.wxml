@@ -15,7 +15,7 @@
     <t-icon class="icon-center title-icon" name="check" slot="left-icon" />
   </t-cell>
   <view style="padding-left: 20px;padding-right: 20px;">
-    <text style="width: 100%;word-wrap:break-word;font-size: 12px;display: block; " selectable="true">* 健康上报地址：可复制后通过浏览器，在外网打开 https://covid19.shiep.edu.cn/selfreport/DayReport.aspx</text>
+    <text style="width: 100%;word-wrap:break-word;font-size: 12px;display: block;margin-top: 5px; " selectable="true">* 健康上报地址：可复制后通过浏览器，在外网打开 https://covid19.shiep.edu.cn/selfreport/DayReport.aspx</text>
   </view>
 </view>
 
@@ -68,6 +68,7 @@
     wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index"
     icon="{{item.icon}}"
     name="{{item.name}}"
+    value="{{item.value}}"
   >
     {{item.text}}
   </t-tab-bar-item>
