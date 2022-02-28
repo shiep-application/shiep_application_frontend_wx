@@ -2,14 +2,14 @@
 <view style="padding-top: 5px;padding-bottom: 5px;text-align: center;">
   <view style="display: inline-block;position: fixed;left: 0px;">
     <t-button size="small" variant="plain" bindtap="last_term_click" >上一学期</t-button>
-    <t-icon name="chevron-left" size="20px" style="margin-left: 5px;display: inline-block;vertical-align: middle;" bindtap="pre_week"/>
+    <t-icon name="chevron-left" size="20px" style="margin-left: 5px;display: inline-block;vertical-align: middle;" bindtap="pre_week" wx:if="{{mode==0}}"/>
   </view>
   <view style="font-size: 10px;display: inline-block;vertical-align: middle;">
     <view style="text-align: center;margin-bottom: 2px;">{{start_year}}-{{start_year+1}}({{term}})</view>
-    <view style="text-align: center;">第{{week}}周</view>
+    <view style="text-align: center;" wx:if="{{mode==0}}">第{{week}}周</view>
   </view>
   <view style="display: inline-block;position: fixed;right: 0px;">
-    <t-icon name="chevron-right" size="20px" style="display: inline-block;vertical-align: middle;" bindtap="next_week"/>
+    <t-icon name="chevron-right" size="20px" style="display: inline-block;vertical-align: middle;" bindtap="next_week" wx:if="{{mode==0}}"/>
     <t-button size="small" variant="plain" bindtap="next_term_click" style="margin-left: 5px;">下一学期</t-button>
   </view>
 </view>
@@ -36,8 +36,15 @@
             </view>
             <!--课表-->
             <view wx:for="{{wlist}}" wx:key="index">
-              <view wx:if="{{item.start_week <= week && item.end_week >= week}}"
+              <view wx:if="{{item.start_week <= week && item.end_week >= week && mode == 0}}"
               class="flex-item kcb-item" bindtap="showCardView" data-wlist='{{item}}' data-index='{{index}}' style="margin-left:{{(item.xqj-1)*98}}rpx;margin-top:{{(item.skjc-1)*50+2}}px;height:{{item.skcd*50-5}}px;background-color:{{item.color}}">
+                <view class="smalltext" style='-webkit-line-clamp: {{item.skcd == "3"?"4":(item.skcd == "4"?"6":"2")}};'>{{item.kcm}}</view>
+                <view class="js">{{item.js}}</view>
+                <view class='classRoom'>({{item.jsbh == ''?'--':item.jsbh}})</view>
+                <!-- xqj代表星期几上课，sksj是上课时间，skcd上课长度，kcm课程名，jsbh教室编号 -->
+              </view>
+              <view wx:if="{{mode==1}}"
+              class="flex-item kcb-item" bindtap="showCardView" data-wlist='{{item}}' data-index='{{index}}' style="margin-left:{{(item.xqj-1)*100+(item.dulp_id*5)}}rpx;margin-top:{{(item.skjc-1)*50+2+(item.dulp_id*3)}}px;height:{{item.skcd*50-5}}px;background-color:{{item.color}}">
                 <view class="smalltext" style='-webkit-line-clamp: {{item.skcd == "3"?"4":(item.skcd == "4"?"6":"2")}};'>{{item.kcm}}</view>
                 <view class="js">{{item.js}}</view>
                 <view class='classRoom'>({{item.jsbh == ''?'--':item.jsbh}})</view>
@@ -54,17 +61,19 @@
 <t-popup
   visible="{{pop_visible}}" placement="center" bind:visible-change="onVisibleChange" >
   <view slot="content" 
-    style="height: 115px;background-color: white;opacity: 0.9;padding-top: 20px;padding-left: 20px;font-size: 14px;padding-right: 20px;"
+    style="background-color: white;opacity: 0.9;padding-top: 20px;padding-left: 20px;font-size: 14px;padding-right: 20px;padding-bottom: 10px;"
   >
-    <view style="margin-bottom: 5px;font-weight: bold;">{{kcm}}</view>
-    <view style="margin-bottom: 5px;">授课教师：{{js}}</view>
-    <view style="margin-bottom: 5px;">授课地点：{{jsbh}}</view>
-    <view style="margin-bottom: 5px;">课次安排：{{shsj}}</view>
+    <view wx:for="{{choosed_lessons}}" data-choosed_lessons='{{item}}' data-index='{{index}}' style="margin-bottom: 20px;">
+      <view style="margin-bottom: 5px;font-weight: bold;">{{item.kcm}}</view>
+      <view style="margin-bottom: 5px;">授课教师：{{item.js}}</view>
+      <view style="margin-bottom: 5px;">授课地点：{{item.jsbh}}</view>
+      <view style="margin-bottom: 5px;">课次安排：{{item.shsj}}</view>
+    </view>
   </view>
 </t-popup>
 
-<button type="primary" class="circle" style="position: fixed;bottom: 10px;right: 10px;font-size: 14px;">
-<text style="position: fixed;bottom: 32px;right: 20px;" bindtap="change_mode">{{mode==0?"学期视图":"周视图"}}</text>
+<button type="primary" class="circle" style="position: fixed;bottom: 10px;right: 10px;font-size: 14px;" bindtap="change_mode">
+<view style="width: inherit;height: inherit;position: relative;left: -12px;top: 20px;">{{mode==0?"周视图":"学期视图"}}</view>
 </button>
 <!-- 通知 -->
 <t-message id="t-message" />

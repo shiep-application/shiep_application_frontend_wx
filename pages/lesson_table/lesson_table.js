@@ -7,7 +7,7 @@ Page({
     termcode: 44,
     start_year: 2021, term: 2,
     week: 3,
-    kcm: null, js: null, jsbh: null, shsj: null,
+    choosed_lessons: [],
     pop_visible: false,
     color_list: ["#E57373","#F06292","#BA68C8","#9575CD","#7986CB","#64B5F6","#4FC3F7","#4DD0E1","#4DB6AC","#81C784","#AED581","#DCE775","#FFF176","#FFD54F","#FFB74D","#FF8A65","#A1887F","#E0E0E0","#90A4AE"],
     type: 0,
@@ -16,6 +16,11 @@ Page({
     dayTab: 0,
     day: ['10.25', '10.26', '10.27', '10.28', '10.29', '10.30', '10.31',],
     wlist: [],
+  },
+  change_mode: function() {
+    let mode = this.data.mode
+    mode = (mode + 1) % 2
+    this.setData({mode: mode})
   },
   pre_week: function() {
     let week = null
@@ -55,6 +60,7 @@ Page({
       termcode: termcode - 1,
       start_year: start_year,
       term: term,
+      week: 1,
     })
     wx.setStorageSync('termcode', termcode - 1)
     wx.setStorageSync('start_year', start_year)
@@ -75,6 +81,7 @@ Page({
       termcode: termcode + 1,
       start_year: start_year,
       term: term,
+      week: 1,
     })
     wx.setStorageSync('termcode', termcode + 1)
     wx.setStorageSync('start_year', start_year)
@@ -89,11 +96,21 @@ Page({
   showCardView: function(e) {
     let list = e.currentTarget.dataset.wlist
     console.log(e.currentTarget.dataset.wlist)
+    let start1 = list.skjc; let skcd = list.skcd;
+    let end1 = start1 + skcd - 1;
+    let xq1 = list.xqj
+    // 查找是否有重复课程
+    let lessons = this.data.wlist
+    let dulp_lessons_list = []
+    for (let i = 0; i < lessons.length; i++) {
+      let start2 = lessons[i].skjc; let end2 = start2 + lessons[i].skcd - 1; let xq2 = lessons[i].xqj;
+      if (!(end2 <start1 || start2 > end1) && xq1 == xq2) {
+        dulp_lessons_list.push(lessons[i])
+      }
+    }
+    console.log(dulp_lessons_list)
     this.setData({
-      kcm: list.kcm,
-      js: list.js,
-      jsbh: list.jsbh,
-      shsj: list.shsj,
+      choosed_lessons: dulp_lessons_list,
       pop_visible: true,
     })
   },
@@ -169,39 +186,46 @@ Page({
               }
               // 按课程处理信息
               lesson_map.forEach(function(value, key) {
-                // <br/>第二外语-日语1班[1-8周] 沈樱[(临港)三教501]
-                let kcm = key.split("<br/>")[1].split("[")[0]
-                let js = key.split("<br/>")[1].split("]")[1].split("[")[0].trim()
-                let jsbh = key.split("<br/>")[1].split("]")[1].split("[")[1].split(")")[1]
-                let shsj = key.split("<br/>")[1].split("[")[1].split("]")[0]
-                let start_week = parseInt(shsj.split("-")[0])
-                let end_week = parseInt(shsj.split("-")[1])
-                
-                function sort(a,b) {  
-                  return a.xqj-b.xqj  
-                }
-                value.sort(sort);
-                let last_xq = -1; let last_jc = -1
-                let count = 1
-                let lesson = {}
-                for (let m = 0; m < value.length; m++) {
-                  let item = value[m]
-                  // 是连续的统一节课
-                  if (item.xqj == last_xq && item.jc == last_jc + 1) {
-                    count++
-                  // 是不同节课
-                  } else {
-                    if (count !== 1) {
-                      lesson["skcd"] = count
-                      wlist.push(lesson)
-                    }  
-                    count = 1
-                    lesson = {"kcm": kcm, "js": js, "jsbh": jsbh, "skjc": item.jc, "xqj": item.xqj, "shsj": shsj, "start_week": start_week, "end_week": end_week}
+                // <br/>Tensor Flow与深度学习1班[9-16周] 孙园[(临港)三教501]<br/><br/>Python程序设计1班[1-8周] 孙园[(临港)三教501]
+                let courses = key.split("<br/>")
+                courses = courses.filter ((x) => x !== '');
+                console.log(courses)
+                for (let c = 0; c < courses.length; c++) {
+                  key = courses[c]
+                  // <br/>第二外语-日语1班[1-8周] 沈樱[(临港)三教501]
+                  let kcm = key.split("[")[0]
+                  let js = key.split("]")[1].split("[")[0].trim()
+                  let jsbh = key.split("]")[1].split("[")[1].split(")")[1]
+                  let shsj = key.split("[")[1].split("]")[0]
+                  let start_week = parseInt(shsj.split("-")[0])
+                  let end_week = parseInt(shsj.split("-")[1])
+                  
+                  function sort(a,b) {  
+                    return a.xqj-b.xqj  
                   }
-                  last_jc = item.jc; last_xq = item.xqj
+                  value.sort(sort);
+                  let last_xq = -1; let last_jc = -1
+                  let count = 1
+                  let lesson = {}
+                  for (let m = 0; m < value.length; m++) {
+                    let item = value[m]
+                    // 是连续的统一节课
+                    if (item.xqj == last_xq && item.jc == last_jc + 1) {
+                      count++
+                    // 是不同节课
+                    } else {
+                      if (count !== 1) {
+                        lesson["skcd"] = count
+                        wlist.push(lesson)
+                      }  
+                      count = 1
+                      lesson = {"kcm": kcm, "js": js, "jsbh": jsbh, "skjc": item.jc, "xqj": item.xqj, "shsj": shsj, "start_week": start_week, "end_week": end_week, "dulp_id": c}
+                    }
+                    last_jc = item.jc; last_xq = item.xqj
+                  }
+                  lesson["skcd"] = count
+                  wlist.push(lesson)
                 }
-                lesson["skcd"] = count
-                wlist.push(lesson)
               })
               function my_indexOf(list, item_key) {  
                 for (let i = 0; i < list.length; i++) {
