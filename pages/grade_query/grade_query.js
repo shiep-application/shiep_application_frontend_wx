@@ -60,11 +60,11 @@ Page({
                   content: '远端服务器链接错误，请重试',
                 });
               }
-              else if (res.data.code) {
+              else if (res.data.err_code) {
                 Message.error({
                   offset: [20, 32],
                   duration: 2000,
-                  content: res.data.message,
+                  content: res.data.err_msg,
                 });
               } else {
                 // 得到是否订阅状态
@@ -113,11 +113,11 @@ Page({
                   content: '远端服务器链接错误，请重试',
                 });
               }
-              else if (res.data.code) {
+              else if (res.data.err_code) {
                 Message.error({
                   offset: [20, 32],
                   duration: 2000,
-                  content: res.data.message,
+                  content: res.data.err_msg,
                 });
               } else {
                 if (res.data == "success") {
@@ -201,11 +201,11 @@ Page({
                   content: '远端服务器链接错误，请重试',
                 });
               }
-              else if (res.data.code) {
+              else if (res.data.err_code) {
                 Message.error({
                   offset: [20, 32],
                   duration: 2000,
-                  content: res.data.message,
+                  content: res.data.err_msg,
                 });
               } else {
                 // 得到是否订阅状态
@@ -258,11 +258,11 @@ Page({
                   isLoading: false
                 })
               }
-              else if (res.data.code) {
+              else if (res.data.err_code) {
                 Message.error({
                   offset: [20, 32],
                   duration: 2000,
-                  content: res.data.message,
+                  content: res.data.err_msg,
                 });
                 that.setData({
                   isLoading: false
@@ -292,11 +292,11 @@ Page({
                               isLoading: false
                             })
                           }
-                          else if (res.data.code) {
+                          else if (res.data.err_code) {
                             Message.error({
                               offset: [20, 32],
                               duration: 2000,
-                              content: res.data.message,
+                              content: res.data.err_msg,
                             });
                             that.setData({
                               isLoading: false

@@ -2,9 +2,13 @@
 import Message from '../../tdesign-miniprogram/message/index';
 Page({
   data: {
-    kcm: null, js: null, jsbh: null,
+    mode: 0, // 0代表周模式，1代表星期模式
+    term_start_date: "2022/02/21",
+    termcode: 44,
+    start_year: 2021, term: 2,
+    week: 3,
+    kcm: null, js: null, jsbh: null, shsj: null,
     pop_visible: false,
-    // color_list: ["#bbd3fb", "#f8b9be", "#f7c797", "#85dbbe", "#eeeeee", "#85daff", "#d8abff", "#fbca25", "#ffb2f2", "#266fe8", "#c9353f", "#ba431b", "#067945", "#007edf", "#834ec2", "#a37200", "#d42c9d"],
     color_list: ["#E57373","#F06292","#BA68C8","#9575CD","#7986CB","#64B5F6","#4FC3F7","#4DD0E1","#4DB6AC","#81C784","#AED581","#DCE775","#FFF176","#FFD54F","#FFB74D","#FF8A65","#A1887F","#E0E0E0","#90A4AE"],
     type: 0,
     currentTab: 1,
@@ -12,6 +16,70 @@ Page({
     dayTab: 0,
     day: ['10.25', '10.26', '10.27', '10.28', '10.29', '10.30', '10.31',],
     wlist: [],
+  },
+  pre_week: function() {
+    let week = null
+    if (this.data.week == 1) {
+      return
+    } else {
+      week = this.data.week - 1
+    }
+    this.setData({
+      week: week,
+    })
+    wx.setStorageSync('week', week)
+  },
+  next_week: function() {
+    let week = null
+    if (this.data.week == 16) {
+      return
+    } else {
+      week = this.data.week + 1
+    }
+    this.setData({
+      week: week,
+    })
+    wx.setStorageSync('week', week)
+  },
+  last_term_click: function() {
+    let start_year, term = null;
+    if (this.data.term == 1) {
+      start_year = this.data.start_year - 1
+      term = 2
+    } else {
+      start_year = this.data.start_year
+      term = 1
+    }
+    let termcode = this.data.termcode
+    this.setData({
+      termcode: termcode - 1,
+      start_year: start_year,
+      term: term,
+    })
+    wx.setStorageSync('termcode', termcode - 1)
+    wx.setStorageSync('start_year', start_year)
+    wx.setStorageSync('term', term)
+    this.get_lesson_table()
+  },
+  next_term_click: function() {
+    let start_year, term = null;
+    if (this.data.term == 2) {
+      start_year = this.data.start_year + 1
+      term = 1
+    } else {
+      start_year = this.data.start_year
+      term = 2
+    }
+    let termcode = this.data.termcode
+    this.setData({
+      termcode: termcode + 1,
+      start_year: start_year,
+      term: term,
+    })
+    wx.setStorageSync('termcode', termcode + 1)
+    wx.setStorageSync('start_year', start_year)
+    wx.setStorageSync('term', term)
+    this.get_lesson_table()
   },
   onVisibleChange({detail}) { 
     this.setData({ 
@@ -25,8 +93,24 @@ Page({
       kcm: list.kcm,
       js: list.js,
       jsbh: list.jsbh,
-      pop_visible: true
+      shsj: list.shsj,
+      pop_visible: true,
     })
+  },
+  getDaysBetween: function(startTime, endTime) {
+    //转化日期为时间戳，ios与Android兼容写法
+    var  startDate = Date.parse(startTime);
+    var  endDate = Date.parse(endTime);
+    var days=(endDate - startDate)/(1*24*60*60*1000) + 1;
+    var month=days/30;
+    var monthDay=days%30;
+    var week=days/7;
+    var weekDay=days%7;
+    // return days+"天";//两个时间间隔的天数
+    week = Math.round(parseInt(week))
+    if (weekDay > 0) week = week + 1
+    return week;//两个时间间隔了几周(向上取整)
+    //return Math.round(parseInt(month))+' 月 '+monthDay+' 天';//两个时间间隔了几个月
   },
   onLoad: function (options) {
     wx.getSystemInfo({
@@ -37,10 +121,9 @@ Page({
       },
     })
   },
-  onShow: function () {
+  get_lesson_table: function () {
     const that = this
     let wlist = []
-    // 获取wx_code
     wx.login({
       success: function (res) {
         // 获取课表
@@ -48,7 +131,7 @@ Page({
           url: 'http://127.0.0.1:6677/api/lesson_table_query',
           data: {
             code: res.code,
-            termcode: 43
+            termcode: that.data.termcode
           },
           method: 'POST',  
           header: {'content-type': 'application/json'},
@@ -61,11 +144,11 @@ Page({
                 duration: 2000,
                 content: '远端服务器链接错误，请重试',
               });
-            } else if (res.data.code) {
+            } else if (res.data.err_code) {
               Message.error({
                 offset: [20, 32],
                 duration: 2000,
-                content: res.data.message,
+                content: res.data.err_msg,
               });
             } else {
               console.log(res.data)
@@ -90,6 +173,9 @@ Page({
                 let kcm = key.split("<br/>")[1].split("[")[0]
                 let js = key.split("<br/>")[1].split("]")[1].split("[")[0].trim()
                 let jsbh = key.split("<br/>")[1].split("]")[1].split("[")[1].split(")")[1]
+                let shsj = key.split("<br/>")[1].split("[")[1].split("]")[0]
+                let start_week = parseInt(shsj.split("-")[0])
+                let end_week = parseInt(shsj.split("-")[1])
                 
                 function sort(a,b) {  
                   return a.xqj-b.xqj  
@@ -110,7 +196,7 @@ Page({
                       wlist.push(lesson)
                     }  
                     count = 1
-                    lesson = {"kcm": kcm, "js": js, "jsbh": jsbh, "skjc": item.jc, "xqj": item.xqj}
+                    lesson = {"kcm": kcm, "js": js, "jsbh": jsbh, "skjc": item.jc, "xqj": item.xqj, "shsj": shsj, "start_week": start_week, "end_week": end_week}
                   }
                   last_jc = item.jc; last_xq = item.xqj
                 }
@@ -128,11 +214,46 @@ Page({
                 wlist[i].color = that.data.color_list[index]
               }
               that.setData({wlist: wlist})
+              console.log(wlist)
             }
           }
         })
       }
     })
+  },
+  onShow: function () {
+    const that = this
+    // 计算当前是第几周
+    var myDate = new Date();
+    const curr_date = myDate.toLocaleDateString(); 
+    let delt = this.getDaysBetween(that.data.term_start_date, curr_date)
+    wx.setStorageSync('week', delt)
+
+    // 获取学期序号
+    let termcode = wx.getStorageSync('termcode')
+    let start_year  = wx.getStorageSync('start_year')
+    let term  = wx.getStorageSync('term')
+    let week  = wx.getStorageSync('week')
+    this.setData({
+      termcode: termcode,
+      start_year: start_year,
+      term: term,
+      week: week,
+    })
+    if (!termcode) {
+      this.setData({termcode: 44})
+    }
+    if (!start_year) {
+      this.setData({start_year: 2021})
+    }
+    if (!term) {
+      this.setData({term: 2})
+    }
+    if (!week) {
+      this.setData({week: 1})
+    }
+    // 获取课表
+    that.get_lesson_table()
   },
 
   clickShow: function (e) {

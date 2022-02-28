@@ -39,10 +39,12 @@
       <view class="ul">● 本软件已开源 https://github.com/shiep-application，<span style="color: red">不会缓存各同学的成绩以及其他隐私信息</span>，开发者愿接受公众的监督 </view>
       <view class="ul">● 由于软件为单人开发单人维护，暂不考虑适配本科生群体、教师群体，同时对于非数理学院（电子信息）研究生的适配或许会存在问题</view>
       <view class="ul">● 目前仍为初稿状态，<span style="color: red">请勿恶意攻击！</span></view>
+      <view class="ul">● <span style="color: red">由于统一身份验证对同一学号的频繁登录有限制，因此如遇“学号或密码错误”（绑定界面除外），可暂缓使用</span>或使用内网登录研究生系统</view>
       <view class="ul">● 如在使用软件的过程中遇到问题，可以邮件联系开发者 xuyuyan999@126.com</view>
     </t-tab-panel>
     <t-tab-panel label="迭代计划" value="2">
       <view style="margin-top: 20px;"></view>
+      <view class="ul">● 【重要】优化身份验证逻辑，尽减少频繁登录限制</view>
       <view class="ul">● 【重要】学生动态申请</view>
       <view class="ul">● 【重要】学生请假与销假</view>
       <view class="ul">● 【一般】学生课程评价（学评教）</view>

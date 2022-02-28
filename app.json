@@ -13,7 +13,8 @@
     "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tabs/tab-panel",
-    "t-popup": "tdesign-miniprogram/popup/popup"
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-icon": "tdesign-miniprogram/icon/icon"
   },
   "pages": [
     "pages/main/main",
