@@ -1,5 +1,5 @@
 <!--pages/lesson_table/lesson_table.wxml-->
-<view style="padding-top: 5px;padding-bottom: 5px;text-align: center;">
+<view style="height:27px;padding-top: 5px;padding-bottom: 5px;text-align: center;">
   <view style="display: inline-block;position: fixed;left: 0px;">
     <t-button size="small" variant="plain" bindtap="last_term_click" >上一学期</t-button>
     <t-icon name="chevron-left" size="20px" style="margin-left: 5px;display: inline-block;vertical-align: middle;" bindtap="pre_week" wx:if="{{mode==0}}"/>
