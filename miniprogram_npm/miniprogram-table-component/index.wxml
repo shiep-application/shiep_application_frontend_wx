@@ -39,7 +39,7 @@
             style="width:{{ headers[index].width }}rpx;color:{{ headers[index].color }};" 
             bindtap="onRowClick"
           >     
-          {{it[head["prop"]]}}
+          {{headers[index].prop=="cj" && viewed==0 ? "*****":it[head["prop"]]}}
           </view>        
         </view>
       </block>

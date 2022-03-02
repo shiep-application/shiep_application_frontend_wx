@@ -13,13 +13,10 @@
     "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
     "t-tab-panel": "tdesign-miniprogram/tabs/tab-panel",
-    "t-popup": "tdesign-miniprogram/popup/popup",
-    "t-icon": "tdesign-miniprogram/icon/icon"
+    "t-popup": "tdesign-miniprogram/popup/popup"
   },
   "pages": [
     "pages/main/main",
-    "pages/index/index",
-    "pages/logs/logs",
     "pages/grade_query/grade_query",
     "pages/bound/bound",
     "pages/lesson_table/lesson_table"

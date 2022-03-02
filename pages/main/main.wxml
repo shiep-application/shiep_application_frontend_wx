@@ -31,6 +31,14 @@
       <view class="ul">● 课表查询</view>
       <view class="ul">● 学生请假与销假（敬请期待）</view>
       <view class="ul">● 学生动态申请（敬请期待）</view>
+
+      <view style="margin-top: 20px;">【迭代计划】：</view>
+      <view class="ul">● 【重要】优化身份验证逻辑，尽减少频繁登录限制</view>
+      <view class="ul">● 【重要】学生动态申请</view>
+      <view class="ul">● 【重要】学生请假与销假</view>
+      <view class="ul">● 【一般】学生课程评价（学评教）</view>
+      <view style="margin-top: 10px;">* 如有其他想要开发者实现的，可以提需求（https://github.com/shiep-application/shiep_application_frontend_web/issues）</view>
+      <view style="margin-top: 10px;">* 无法打开 github 的同学可以邮件联系开发者xuyuyan999@126.com，</view>
     </t-tab-panel>
     <t-tab-panel label="软件申明" value="1">
       <view style="margin-top: 20px;"></view>
@@ -42,14 +50,11 @@
       <view class="ul">● <span style="color: red">由于统一身份验证对同一学号的频繁登录有限制，因此如遇“学号或密码错误”（绑定界面除外），可暂缓使用</span>或使用内网登录研究生系统</view>
       <view class="ul">● 如在使用软件的过程中遇到问题，可以邮件联系开发者 xuyuyan999@126.com</view>
     </t-tab-panel>
-    <t-tab-panel label="迭代计划" value="2">
+    <t-tab-panel label="已知问题" value="2">
       <view style="margin-top: 20px;"></view>
-      <view class="ul">● 【重要】优化身份验证逻辑，尽减少频繁登录限制</view>
-      <view class="ul">● 【重要】学生动态申请</view>
-      <view class="ul">● 【重要】学生请假与销假</view>
-      <view class="ul">● 【一般】学生课程评价（学评教）</view>
-      <view style="margin-top: 10px;">* 如有其他想要开发者实现的，可以提需求（https://github.com/shiep-application/shiep_application_frontend_web/issues）</view>
-      <view style="margin-top: 10px;">* 无法打开 github 的同学可以邮件联系开发者xuyuyan999@126.com，</view>
+      <view class="ul">● 课表周视图中，“切换下一周”操作时，容易误触“切换下一学期”</view>
+      <view class="ul">● 绑定界面，对已绑定用户缺少合理交互提示</view>
+      <view class="ul">● 课表学期视图中，如用户切换学期查看历史课表，在查看结束请切换回正确的学期。否则将影响教学周的计算。</view>
     </t-tab-panel>
     <t-tab-panel label="加入我们" value="3">
       <view style="margin-top: 20px;"></view>

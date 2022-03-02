@@ -1,11 +1,13 @@
 // pages/grade_query/grade_query.js
 import Message from '../../tdesign-miniprogram/message/index';
 import Dialog from '../../tdesign-miniprogram/dialog/index';
+const url_prefix = "https://shiep.xuyuyan.cn"
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    viewed: 1, // 1为成绩可见模型，0为成绩不可见模式
     ave_grades: "计算中...",
     if_tips: "",
     if_grade_subscribe: 0,
@@ -39,6 +41,10 @@ Page({
     row: null,
     msg: '暂无数据'
   },
+  change_viewed: function() {
+    let viewed = this.data.viewed
+    this.setData({viewed: (viewed + 1) % 2})
+  },
   subscribe:function() {
     const that = this
     wx.login({
@@ -46,7 +52,7 @@ Page({
         if (res.errMsg === "login:ok") {
           // 获取是否订阅和订阅次数
           wx.request({
-            url: 'http://127.0.0.1:6677/api/grade_subscribe_or_add_times_wx',
+            url: url_prefix + '/api/grade_subscribe_or_add_times_wx',
             data: {
               code: res.code
             },
@@ -99,7 +105,7 @@ Page({
         if (res.errMsg === "login:ok") {
           // 获取是否订阅和订阅次数
           wx.request({
-            url: 'http://127.0.0.1:6677/api/grade_cancel_subscribe',
+            url: url_prefix + '/api/grade_cancel_subscribe',
             data: {
               code: res.code
             },
@@ -187,7 +193,7 @@ Page({
         if (res.errMsg === "login:ok") {
           // 获取是否订阅和订阅次数
           wx.request({
-            url: 'http://127.0.0.1:6677/api/if_grade_subscribe_wx',
+            url: url_prefix + '/api/if_grade_subscribe_wx',
             data: {
               code: res.code
             },
@@ -240,7 +246,7 @@ Page({
       success: function (res) {
         if (res.errMsg === "login:ok") {
           wx.request({
-            url: 'http://127.0.0.1:6677/api/wx_auto_login',
+            url: url_prefix + '/api/wx_auto_login',
             data: {
               code: res.code
             },
@@ -274,7 +280,7 @@ Page({
                     // 登录成功
                     if (res.errMsg === "login:ok") {
                       wx.request({
-                        url: 'http://127.0.0.1:6677/api/grade_query_once',
+                        url: url_prefix + '/api/grade_query_once',
                         data: {
                           code: res.code
                         },

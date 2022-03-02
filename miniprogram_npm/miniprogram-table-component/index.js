@@ -114,6 +114,10 @@ Component({
       type: Array,
       value: []
     },
+    viewed: {
+      type: Number,
+      value: 1
+    },
     headers: {
       type: Array,
       value: []
