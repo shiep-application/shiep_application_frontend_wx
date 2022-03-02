@@ -73,7 +73,7 @@
 </t-popup>
 
 <button type="primary" class="circle" style="position: fixed;bottom: 10px;right: 10px;font-size: 14px;" bindtap="change_mode">
-<view style="width: inherit;height: inherit;position: relative;left: -12px;top: 20px;">{{mode==0?"周视图":"学期视图"}}</view>
+<view style="width: inherit;height: inherit;position: relative;left: -12px;top: 20px;">{{mode==0?"学期视图":"周视图"}}</view>
 </button>
 <!-- 通知 -->
 <t-message id="t-message" />
