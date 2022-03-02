@@ -1,5 +1,6 @@
 // pages/main.js
 import Message from '../../tdesign-miniprogram/message/index';
+const url_prefix = "https://shiep.xuyuyan.cn"
 Page({
 
   /**
@@ -83,7 +84,7 @@ Page({
         // 登录成功
         if (res.errMsg === "login:ok") {
           wx.request({
-            url: 'http://127.0.0.1:6677/api/wx_auto_login',
+            url: url_prefix + '/api/wx_auto_login',
             data: {
               code: res.code
             },

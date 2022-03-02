@@ -1,5 +1,6 @@
 // pages/lesson_table/lesson_table.js
 import Message from '../../tdesign-miniprogram/message/index';
+const url_prefix = "https://shiep.xuyuyan.cn"
 Page({
   data: {
     mode: 0, // 0代表周模式，1代表星期模式
@@ -145,7 +146,7 @@ Page({
       success: function (res) {
         // 获取课表
         wx.request({
-          url: 'http://127.0.0.1:6677/api/lesson_table_query',
+          url: url_prefix + '/api/lesson_table_query',
           data: {
             code: res.code,
             termcode: that.data.termcode
