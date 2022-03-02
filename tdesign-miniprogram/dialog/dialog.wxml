@@ -18,7 +18,7 @@
         wx:if="{{content}}"
         class="{{classPrefix}}__body {{title ? '' : classPrefix + '__body--without-title'}}"
       >
-        <text class="{{classPrefix}}__body-text">{{content}}</text>
+        <text selectable="true" class="{{classPrefix}}__body-text">{{content}}</text>
       </view>
       <slot name="content" />
     </view>
